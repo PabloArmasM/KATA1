@@ -12,9 +12,11 @@ import java.util.Date;
  * @author Loedded
  */
 class Person {
+
     public final String name;
     public final String surname;
     public final Date birth;
+    private static final long MILLISECONDS_PER_YEAR = (long) (1000 * 60 * 60 * 24 * 365.25);
 
     public Person(String name, String surname, Date birth) {
         this.name = name;
@@ -33,15 +35,18 @@ class Person {
     public Date getBirth() {
         return birth;
     }
-    
-    public int getAge(){
+
+    public int getAge() {
         Date today = new Date();
-        return (int) ((today.getTime()-birth.getTime())/(1000*60*60*24*365.25));
+        return (int) milliseconds((today.getTime() - birth.getTime()));
     }
 
     public String getFullName() {
-        return (name+" "+surname);
+        return (name + " " + surname);
     }
-    
+
+    private long milliseconds(long millis) {
+        return (millis / MILLISECONDS_PER_YEAR);
+    }
+
 }
- 
