@@ -5,20 +5,19 @@
  */
 package kata1;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
-/**
- *
- * @author Loedded
- */
+
 class Person {
 
     public final String name;
     public final String surname;
-    public final Date birth;
+    public final Calendar birth;
     private static final long MILLISECONDS_PER_YEAR = (long) (1000 * 60 * 60 * 24 * 365.25);
 
-    public Person(String name, String surname, Date birth) {
+    public Person(String name, String surname, Calendar birth) {
         this.name = name;
         this.surname = surname;
         this.birth = birth;
@@ -32,13 +31,14 @@ class Person {
         return surname;
     }
 
-    public Date getBirth() {
+    public Calendar getBirth() {
         return birth;
     }
 
     public int getAge() {
-        Date today = new Date();
-        return (int) milliseconds((today.getTime() - birth.getTime()));
+        Calendar today;
+        today = GregorianCalendar.getInstance();
+        return (int) milliseconds((today.getTimeInMillis() - birth.getTimeInMillis()));
     }
 
     public String getFullName() {
